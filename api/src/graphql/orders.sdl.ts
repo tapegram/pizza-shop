@@ -19,11 +19,19 @@ export const schema = gql`
     order(id: Int!): Order @requireAuth
   }
 
-  input CreateOrderInput {
-    customerInfoId: Int!
-    deliveryId: Int
-    pizzaTypeId: Int!
-    pizzaSizeId: Int!
+  input CreateOrderFormInput {
+    style: Int!
+    size: Int!
+    toppings: [Int!]!
+    customerName: String!
+    customerEmail: String!
+    customerPhoneNumber: String!
+    delivery: Boolean!
+    streetAddress1: String
+    streetAddress2: String
+    city: String
+    state: String
+    zipCode: String
   }
 
   input UpdateOrderInput {
@@ -34,7 +42,7 @@ export const schema = gql`
   }
 
   type Mutation {
-    createOrder(input: CreateOrderInput!): Order! @requireAuth
+    createOrder(input: CreateOrderFormInput!): Order! @requireAuth
     updateOrder(id: Int!, input: UpdateOrderInput!): Order! @requireAuth
     deleteOrder(id: Int!): Order! @requireAuth
   }

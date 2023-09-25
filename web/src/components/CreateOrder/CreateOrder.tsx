@@ -1,4 +1,4 @@
-import type { CreateOrderInput } from 'types/graphql'
+import type { CreateOrderFormInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
@@ -28,7 +28,7 @@ type Topping = {
 }
 
 const CREATE_ORDER_MUTATION = gql`
-  mutation CreateOrderMutation($input: CreateOrderInput!) {
+  mutation CreateOrderMutation($input: CreateOrderFormInput!) {
     createOrder(input: $input) {
       id
     }
@@ -45,7 +45,7 @@ const CreateOrder = ({ sizes, toppings, types }: Props) => {
     },
   })
 
-  const onSave = (input: CreateOrderInput) => {
+  const onSave = (input: CreateOrderFormInput) => {
     createOrder({ variables: { input } })
   }
 
