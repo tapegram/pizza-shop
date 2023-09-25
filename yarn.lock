@@ -6585,6 +6585,8 @@ __metadata:
   dependencies:
     "@redwoodjs/api": 6.3.1
     "@redwoodjs/graphql-server": 6.3.1
+    email-validator: ^2.0.4
+    phone: ^3.1.40
   languageName: unknown
   linkType: soft
 
@@ -9756,6 +9758,13 @@ __metadata:
     minimalistic-assert: ^1.0.1
     minimalistic-crypto-utils: ^1.0.1
   checksum: 5f361270292c3b27cf0843e84526d11dec31652f03c2763c6c2b8178548175ff5eba95341dd62baff92b2265d1af076526915d8af6cc9cb7559c44a62f8ca6e2
+  languageName: node
+  linkType: hard
+
+"email-validator@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "email-validator@npm:2.0.4"
+  checksum: 580ac50374b006805589cad39b3ed2a016b95e625072f507bfa8fba2d405ba25ffe6686c3f4b06f73380da2106041415387c0dee5b06709d03e56d94013205b1
   languageName: node
   linkType: hard
 
@@ -16032,6 +16041,13 @@ __metadata:
     safe-buffer: ^5.0.1
     sha.js: ^2.4.8
   checksum: 5a30374e87d33fa080a92734d778cf172542cc7e41b96198c4c88763997b62d7850de3fbda5c3111ddf79805ee7c1da7046881c90ac4920b5e324204518b05fd
+  languageName: node
+  linkType: hard
+
+"phone@npm:^3.1.40":
+  version: 3.1.40
+  resolution: "phone@npm:3.1.40"
+  checksum: f55e0ecad1accc667e1269fb44e100f4f32ac07ebe1cc1dcd18fb432ad83d4e364001274a40edf8b843a0606d14b184886fc0e5495b68694c6a0cd887cb868e9
   languageName: node
   linkType: hard
 
