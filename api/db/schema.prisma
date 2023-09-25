@@ -19,24 +19,24 @@ model User {
 // Pizza Shop Config
 
 model PizzaTopping {
-  id           Int     @id @default(autoincrement())
-  name         String  @unique
-  is_available Boolean
-  Order        Order[]
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  isAvailable Boolean
+  Order       Order[]
 }
 
 model PizzaSize {
-  id           Int     @id @default(autoincrement())
-  name         String  @unique
-  is_available Boolean
-  Order        Order[]
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  isAvailable Boolean
+  Order       Order[]
 }
 
 model PizzaType {
-  id           Int     @id @default(autoincrement())
-  name         String  @unique
-  is_available Boolean
-  Order        Order[]
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  isAvailable Boolean
+  Order       Order[]
 }
 
 // Ordering

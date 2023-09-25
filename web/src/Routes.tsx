@@ -14,6 +14,7 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/create-order" page={CreateOrderPage} name="createOrder" />
       <Set wrap={ScaffoldLayout} title="PizzaSizes" titleTo="pizzaSizes" buttonLabel="New PizzaSize" buttonTo="newPizzaSize">
         <Route path="/pizza-sizes/new" page={PizzaSizeNewPizzaSizePage} name="newPizzaSize" />
         <Route path="/pizza-sizes/{id:Int}/edit" page={PizzaSizeEditPizzaSizePage} name="editPizzaSize" />
