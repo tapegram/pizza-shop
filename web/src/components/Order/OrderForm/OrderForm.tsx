@@ -1,3 +1,5 @@
+import type { EditOrderById, UpdateOrderInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -6,8 +8,6 @@ import {
   NumberField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type { EditOrderById, UpdateOrderInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
 
 type FormOrder = NonNullable<EditOrderById['order']>
@@ -17,8 +17,25 @@ interface OrderFormProps {
   onSave: (data: UpdateOrderInput, id?: FormOrder['id']) => void
   error: RWGqlError
   loading: boolean
+  sizes: Size[]
+  types: Type[]
+  toppings: Topping[]
 }
 
+type Size = {
+  id: number
+  name: string
+}
+
+type Type = {
+  id: number
+  name: string
+}
+
+type Topping = {
+  id: number
+  name: string
+}
 const OrderForm = (props: OrderFormProps) => {
   const onSubmit = (data: FormOrder) => {
     props.onSave(data, props?.order?.id)

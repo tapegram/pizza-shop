@@ -34,7 +34,7 @@ const CREATE_ORDER_MUTATION = gql`
     }
   }
 `
-const CreateOrder = (props: Props) => {
+const CreateOrder = ({ sizes, toppings, types }: Props) => {
   const [createOrder, { loading, error }] = useMutation(CREATE_ORDER_MUTATION, {
     onCompleted: () => {
       toast.success('Order created')
@@ -52,10 +52,17 @@ const CreateOrder = (props: Props) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Order</h2>
+        <h2 className="rw-heading rw-heading-secondary">Pizza Time!</h2>
       </header>
       <div className="rw-segment-main">
-        <OrderForm onSave={onSave} loading={loading} error={error} />
+        <OrderForm
+          onSave={onSave}
+          loading={loading}
+          error={error}
+          sizes={sizes}
+          toppings={toppings}
+          types={types}
+        />
       </div>
     </div>
   )

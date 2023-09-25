@@ -8,7 +8,7 @@ import CreateOrder from './CreateOrder'
 describe('CreateOrder', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<CreateOrder />)
+      render(<CreateOrder sizes={[]} toppings={[]} types={[]} />)
     }).not.toThrow()
   })
 })
