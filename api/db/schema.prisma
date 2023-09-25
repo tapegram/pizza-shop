@@ -8,11 +8,90 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+// Auth
+// https://redwoodjs.com/docs/auth/dbauth
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+}
+
+// Pizza Shop Config
+
+model PizzaToppings {
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  is_available Boolean
+  Order        Order[]
+}
+
+model PizzaSizes {
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  is_available Boolean
+  Order        Order[]
+}
+
+model PizzaTypes {
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  is_available Boolean
+  Order        Order[]
+}
+
+// Ordering
+
+model Order {
+  id Int @id @default(autoincrement())
+
+  customerInfo   CustomerInfo? // Prisma forces me to make this optional. ORMs are lame.
+  customerInfoId Int
+
+  delivery   Delivery? @relation(fields: [deliveryId], references: [id])
+  deliveryId Int?
+
+  pizzaType   PizzaTypes @relation(fields: [pizzaTypeId], references: [id])
+  pizzaTypeId Int
+
+  pizzaSize   PizzaSizes @relation(fields: [pizzaSizeId], references: [id])
+  pizzaSizeId Int
+
+  pizzaTopping PizzaToppings[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CustomerInfo {
+  id Int @id @default(autoincrement())
+
+  name  String
+  phone String
+  email String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // At the moment, we don't try to connect the same customer into a single entity
+  // so each Order-CustomerInfo is 1-1
+  Order   Order @relation(fields: [orderId], references: [id])
+  orderId Int   @unique
+}
+
+model Delivery {
+  id        Int     @id @default(autoincrement())
+  address   Address @relation(fields: [addressId], references: [id])
+  Order     Order[]
+  addressId Int
+}
+
+// Modeling address can be hard. Limiting this to standard us address forms for now
+model Address {
+  id               Int        @id @default(autoincrement())
+  street_address_1 String
+  street_address_2 String
+  city             String
+  state            String
+  zip              String
+  Delivery         Delivery[]
 }
