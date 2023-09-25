@@ -1,3 +1,11 @@
+import type { CreateOrderInput } from 'types/graphql'
+
+import { navigate, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+
+import OrderForm from 'src/components/Order/OrderForm'
+
 type Props = {
   sizes: Size[]
   types: Type[]
@@ -19,12 +27,36 @@ type Topping = {
   name: string
 }
 
+const CREATE_ORDER_MUTATION = gql`
+  mutation CreateOrderMutation($input: CreateOrderInput!) {
+    createOrder(input: $input) {
+      id
+    }
+  }
+`
 const CreateOrder = (props: Props) => {
+  const [createOrder, { loading, error }] = useMutation(CREATE_ORDER_MUTATION, {
+    onCompleted: () => {
+      toast.success('Order created')
+      navigate(routes.orders())
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
+  const onSave = (input: CreateOrderInput) => {
+    createOrder({ variables: { input } })
+  }
+
   return (
-    <div>
-      <div>{JSON.stringify([props.sizes, props.types, props.toppings])}</div>
-      <h2>{'CreateOrder'}</h2>
-      <p>{'Find me in ./web/src/components/CreateOrder/CreateOrder.tsx'}</p>
+    <div className="rw-segment">
+      <header className="rw-segment-header">
+        <h2 className="rw-heading rw-heading-secondary">New Order</h2>
+      </header>
+      <div className="rw-segment-main">
+        <OrderForm onSave={onSave} loading={loading} error={error} />
+      </div>
     </div>
   )
 }

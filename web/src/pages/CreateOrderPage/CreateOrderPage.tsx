@@ -11,8 +11,6 @@ const CreateOrderPage = () => {
         description="Create a new order for a delicious pizza"
       />
 
-      <h1>CreateOrderPage</h1>
-
       <CreateOrderCell />
     </>
   )
