@@ -18,21 +18,21 @@ model User {
 
 // Pizza Shop Config
 
-model PizzaToppings {
+model PizzaTopping {
   id           Int     @id @default(autoincrement())
   name         String  @unique
   is_available Boolean
   Order        Order[]
 }
 
-model PizzaSizes {
+model PizzaSize {
   id           Int     @id @default(autoincrement())
   name         String  @unique
   is_available Boolean
   Order        Order[]
 }
 
-model PizzaTypes {
+model PizzaType {
   id           Int     @id @default(autoincrement())
   name         String  @unique
   is_available Boolean
@@ -50,13 +50,13 @@ model Order {
   delivery   Delivery? @relation(fields: [deliveryId], references: [id])
   deliveryId Int?
 
-  pizzaType   PizzaTypes @relation(fields: [pizzaTypeId], references: [id])
+  pizzaType   PizzaType @relation(fields: [pizzaTypeId], references: [id])
   pizzaTypeId Int
 
-  pizzaSize   PizzaSizes @relation(fields: [pizzaSizeId], references: [id])
+  pizzaSize   PizzaSize @relation(fields: [pizzaSizeId], references: [id])
   pizzaSizeId Int
 
-  pizzaTopping PizzaToppings[]
+  pizzaTopping PizzaTopping[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
