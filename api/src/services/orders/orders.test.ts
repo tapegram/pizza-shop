@@ -30,6 +30,7 @@ describe('orders', () => {
         input,
       })
 
+      expect(result.status).toEqual('new')
       expect(result.customerInfoId).not.toBeNull()
       expect(result.pizzaTypeId).toEqual(scenario.pizzaType.newyork.id)
       expect(result.pizzaSizeId).toEqual(scenario.pizzaSize.small.id)
@@ -63,6 +64,7 @@ describe('orders', () => {
 
       expect(result.customerInfoId).not.toBeNull()
       expect(result.delivery).not.toBeNull()
+      expect(result.status).toEqual('new')
       expect(result.pizzaTypeId).toEqual(scenario.pizzaType.newyork.id)
       expect(result.pizzaSizeId).toEqual(scenario.pizzaSize.small.id)
       expect(result.pizzaToppings.map((topping) => topping.name)).toEqual([

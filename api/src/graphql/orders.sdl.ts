@@ -5,6 +5,7 @@ export const schema = gql`
     customerInfoId: Int!
     delivery: Delivery
     deliveryId: Int
+    status: String!
     pizzaType: PizzaType!
     pizzaTypeId: Int!
     pizzaSize: PizzaSize!

@@ -61,6 +61,7 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
       pizzaToppings: {
         connect: toppings.map((id) => ({ id })),
       },
+      status: 'new',
       customerInfo: {
         create: {
           name: customerName,
