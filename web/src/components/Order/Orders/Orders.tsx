@@ -61,7 +61,7 @@ const OrdersList = ({ orders }: FindOrders) => {
               </td>
               <td>{truncate(order.customerInfo.name)}</td>
               <td>{truncate(order.deliveryId ? 'Delivery' : 'Pickup')}</td>
-              <td>{truncate(order.status)}</td>
+              <td>{truncate(order.status.toUpperCase())}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
