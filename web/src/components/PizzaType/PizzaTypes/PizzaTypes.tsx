@@ -55,7 +55,7 @@ const PizzaTypesList = ({ pizzaTypes }: FindPizzaTypes) => {
             <tr key={pizzaType.id}>
               <td>{truncate(pizzaType.id)}</td>
               <td>{truncate(pizzaType.name)}</td>
-              <td>{checkboxInputTag(pizzaType.is_available)}</td>
+              <td>{checkboxInputTag(pizzaType.isAvailable)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

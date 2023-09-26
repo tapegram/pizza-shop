@@ -14,10 +14,10 @@ export const standard = defineScenario<Prisma.CustomerInfoCreateArgs>({
             customerInfoId: 9552598,
             updatedAt: '2023-09-25T15:47:54.881Z',
             pizzaType: {
-              create: { name: 'String4368172', is_available: true },
+              create: { name: 'String4368172', isAvailable: true },
             },
             pizzaSize: {
-              create: { name: 'String3203838', is_available: true },
+              create: { name: 'String3203838', isAvailable: true },
             },
           },
         },
@@ -34,10 +34,10 @@ export const standard = defineScenario<Prisma.CustomerInfoCreateArgs>({
             customerInfoId: 9117136,
             updatedAt: '2023-09-25T15:47:54.881Z',
             pizzaType: {
-              create: { name: 'String3482472', is_available: true },
+              create: { name: 'String3482472', isAvailable: true },
             },
             pizzaSize: {
-              create: { name: 'String5832458', is_available: true },
+              create: { name: 'String5832458', isAvailable: true },
             },
           },
         },

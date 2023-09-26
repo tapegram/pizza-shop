@@ -58,7 +58,7 @@ const PizzaTopping = ({ pizzaTopping }: Props) => {
             </tr>
             <tr>
               <th>Is available</th>
-              <td>{checkboxInputTag(pizzaTopping.is_available)}</td>
+              <td>{checkboxInputTag(pizzaTopping.isAvailable)}</td>
             </tr>
           </tbody>
         </table>

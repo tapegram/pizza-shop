@@ -54,7 +54,7 @@ const PizzaTypeForm = (props: PizzaTypeFormProps) => {
         <FieldError name="name" className="rw-field-error" />
 
         <Label
-          name="is_available"
+          name="isAvailable"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
@@ -62,13 +62,13 @@ const PizzaTypeForm = (props: PizzaTypeFormProps) => {
         </Label>
 
         <CheckboxField
-          name="is_available"
-          defaultChecked={props.pizzaType?.is_available}
+          name="isAvailable"
+          defaultChecked={props.pizzaType?.isAvailable}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />
 
-        <FieldError name="is_available" className="rw-field-error" />
+        <FieldError name="isAvailable" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

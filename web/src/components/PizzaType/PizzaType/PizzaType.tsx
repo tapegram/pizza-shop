@@ -1,13 +1,13 @@
+import type {
+  DeletePizzaTypeMutationVariables,
+  FindPizzaTypeById,
+} from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { checkboxInputTag } from 'src/lib/formatters'
-
-import type {
-  DeletePizzaTypeMutationVariables,
-  FindPizzaTypeById,
-} from 'types/graphql'
 
 const DELETE_PIZZA_TYPE_MUTATION = gql`
   mutation DeletePizzaTypeMutation($id: Int!) {
@@ -58,7 +58,7 @@ const PizzaType = ({ pizzaType }: Props) => {
             </tr>
             <tr>
               <th>Is available</th>
-              <td>{checkboxInputTag(pizzaType.is_available)}</td>
+              <td>{checkboxInputTag(pizzaType.isAvailable)}</td>
             </tr>
           </tbody>
         </table>

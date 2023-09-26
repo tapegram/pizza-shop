@@ -15,7 +15,7 @@ export const QUERY = gql`
     pizzaTopping: pizzaTopping(id: $id) {
       id
       name
-      is_available
+      isAvailable
     }
   }
 `
@@ -27,7 +27,7 @@ const UPDATE_PIZZA_TOPPING_MUTATION = gql`
     updatePizzaTopping(id: $id, input: $input) {
       id
       name
-      is_available
+      isAvailable
     }
   }
 `

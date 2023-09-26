@@ -10,7 +10,7 @@ export const QUERY = gql`
     pizzaSizes {
       id
       name
-      is_available
+      isAvailable
     }
   }
 `

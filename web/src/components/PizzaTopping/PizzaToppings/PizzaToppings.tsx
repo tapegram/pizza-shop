@@ -55,7 +55,7 @@ const PizzaToppingsList = ({ pizzaToppings }: FindPizzaToppings) => {
             <tr key={pizzaTopping.id}>
               <td>{truncate(pizzaTopping.id)}</td>
               <td>{truncate(pizzaTopping.name)}</td>
-              <td>{checkboxInputTag(pizzaTopping.is_available)}</td>
+              <td>{checkboxInputTag(pizzaTopping.isAvailable)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

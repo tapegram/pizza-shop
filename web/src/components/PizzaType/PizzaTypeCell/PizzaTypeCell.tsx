@@ -9,7 +9,7 @@ export const QUERY = gql`
     pizzaType: pizzaType(id: $id) {
       id
       name
-      is_available
+      isAvailable
     }
   }
 `

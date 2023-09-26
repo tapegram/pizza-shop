@@ -12,7 +12,7 @@ export const QUERY = gql`
     pizzaType: pizzaType(id: $id) {
       id
       name
-      is_available
+      isAvailable
     }
   }
 `
@@ -21,7 +21,7 @@ const UPDATE_PIZZA_TYPE_MUTATION = gql`
     updatePizzaType(id: $id, input: $input) {
       id
       name
-      is_available
+      isAvailable
     }
   }
 `
