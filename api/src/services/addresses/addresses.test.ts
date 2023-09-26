@@ -31,16 +31,16 @@ describe('addresses', () => {
   scenario('creates a address', async () => {
     const result = await createAddress({
       input: {
-        street_address_1: 'String',
-        street_address_2: 'String',
+        streetAddress1: 'String',
+        streetAddress2: 'String',
         city: 'String',
         state: 'String',
         zip: 'String',
       },
     })
 
-    expect(result.street_address_1).toEqual('String')
-    expect(result.street_address_2).toEqual('String')
+    expect(result.streetAddress1).toEqual('String')
+    expect(result.streetAddress2).toEqual('String')
     expect(result.city).toEqual('String')
     expect(result.state).toEqual('String')
     expect(result.zip).toEqual('String')
@@ -50,10 +50,10 @@ describe('addresses', () => {
     const original = (await address({ id: scenario.address.one.id })) as Address
     const result = await updateAddress({
       id: original.id,
-      input: { street_address_1: 'String2' },
+      input: { streetAddress1: 'String2' },
     })
 
-    expect(result.street_address_1).toEqual('String2')
+    expect(result.streetAddress1).toEqual('String2')
   })
 
   scenario('deletes a address', async (scenario: StandardScenario) => {

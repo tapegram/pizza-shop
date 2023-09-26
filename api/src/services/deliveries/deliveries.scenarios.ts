@@ -1,4 +1,5 @@
 import type { Prisma, Delivery } from '@prisma/client'
+
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.DeliveryCreateArgs>({
@@ -7,8 +8,8 @@ export const standard = defineScenario<Prisma.DeliveryCreateArgs>({
       data: {
         address: {
           create: {
-            street_address_1: 'String',
-            street_address_2: 'String',
+            streeAddress1: 'String',
+            streetAddress2: 'String',
             city: 'String',
             state: 'String',
             zip: 'String',
@@ -20,8 +21,8 @@ export const standard = defineScenario<Prisma.DeliveryCreateArgs>({
       data: {
         address: {
           create: {
-            street_address_1: 'String',
-            street_address_2: 'String',
+            streetAddress1: 'String',
+            streetAddress2: 'String',
             city: 'String',
             state: 'String',
             zip: 'String',

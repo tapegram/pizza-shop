@@ -1,8 +1,8 @@
 export const schema = gql`
   type Address {
     id: Int!
-    street_address_1: String!
-    street_address_2: String!
+    streetAddress1: String!
+    streetAddress2: String!
     city: String!
     state: String!
     zip: String!
@@ -15,16 +15,16 @@ export const schema = gql`
   }
 
   input CreateAddressInput {
-    street_address_1: String!
-    street_address_2: String!
+    streetAddress1: String!
+    streetAddress2: String!
     city: String!
     state: String!
     zip: String!
   }
 
   input UpdateAddressInput {
-    street_address_1: String
-    street_address_2: String
+    streetAddress1: String
+    streetAddress2: String
     city: String
     state: String
     zip: String

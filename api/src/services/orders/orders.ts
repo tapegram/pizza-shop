@@ -1,3 +1,4 @@
+import * as AddressValidator from 'address-validator'
 import * as EmailValidator from 'email-validator'
 import { phone } from 'phone'
 import type {
@@ -10,6 +11,13 @@ import { validate, validateWith } from '@redwoodjs/api'
 
 import { db } from 'src/lib/db'
 
+type Address = {
+  streetAddress1: string
+  streetAddress2?: string
+  city: string
+  state: string
+  zipCode: string
+}
 export const orders: QueryResolvers['orders'] = () => {
   return db.order.findMany()
 }
@@ -35,17 +43,86 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
   const customerName = validateAndFormatCustomerName(input.customerName)
   const phoneNumber = validateAndFormatPhoneNumber(input.customerPhoneNumber)
   const email = validateAndFormatEmail(input.customerEmail)
-  // email: [notNull, basic email validation]
-  // delivery: [notNull]
-  // All of the following address info should be required if delivery is true, otherwise we can ignore
-  // streetAddress1: [notEmpty, notNull]
-  // streetAddress2: []
-  // city: [notEmpty, notNull]
-  // state: [notEmpty, notNull], should format? Maybe should be a dropdown
-  // all input should be trimmed
+  const delivery: boolean = input.delivery
+  const address: Address | null = delivery
+    ? null
+    : validateAndFormatAddress(
+      input.streetAddress1,
+      input.streetAddress2,
+      input.city,
+      input.state,
+      input.zipCode
+    )
   return db.order.create({
-    data: input,
+    data: {
+      pizzaSizeId: sizeId,
+      pizzaTypeId: styleId,
+      pizzaToppings: {
+        connect: toppings.map((id) => ({ id })),
+      },
+      customerInfo: {
+        create: {
+          name: customerName,
+          email,
+          phone: phoneNumber,
+        },
+      },
+      delivery: delivery
+        ? {
+          create: {
+            address: {
+              create: {
+                streetAddress1: address.streetAddress1,
+                streetAddress2: address.streetAddress2,
+                city: address.city,
+                state: address.state,
+                zip: address.zipCode,
+              },
+            },
+          },
+        }
+        : null,
+    },
   })
+}
+
+const validateAndFormatAddress = (
+  streetAddress1: string,
+  streetAddress2: string | null,
+  city: string,
+  state: string,
+  zipCode: string
+) => {
+  validate(streetAddress1, 'Street Address 1', {
+    presence: true,
+    length: { min: 2 }, // Requring at least a couple characters
+  })
+  validate(city, 'City', {
+    presence: true,
+    length: { min: 2 }, // Requring at least a couple characters
+  })
+  validate(city, 'State', {
+    presence: true,
+    // Requring at least a couple characters
+    // Should refactor the frontend to make this a dropdown so we can assert this is EXACTLY 2 chars
+    // and reduce surface area for issues
+    length: { min: 2 },
+  })
+  validate(zipCode, 'Zip Code', {
+    presence: true,
+    // Exactly matchin 5 digits zip code
+    // I know you can have more digits to be more exact but lets save that
+    // for when we use google maps API to generate addresses on the client. (or something like that)
+    length: { min: 5, max: 5 },
+  })
+
+  return {
+    streetAddress1: streetAddress1.trim().toUpperCase(),
+    streetAddress2: streetAddress2?.trim().toUpperCase() || null,
+    city: city.trim().toUpperCase(),
+    state: state.trim().toUpperCase(),
+    zipCode: zipCode.trim().toUpperCase(),
+  }
 }
 
 const validateAndFormatEmail = (email: string) => {

@@ -87,11 +87,11 @@ model Delivery {
 
 // Modeling address can be hard. Limiting this to standard us address forms for now
 model Address {
-  id               Int        @id @default(autoincrement())
-  street_address_1 String
-  street_address_2 String
-  city             String
-  state            String
-  zip              String
-  Delivery         Delivery[]
+  id             Int        @id @default(autoincrement())
+  streetAddress1 String
+  streetAddress2 String
+  city           String
+  state          String
+  zip            String
+  Delivery       Delivery[]
 }
