@@ -2,23 +2,23 @@ export const schema = gql`
   type PizzaSize {
     id: Int!
     name: String!
-    is_available: Boolean!
+    isAvailable: Boolean!
     Order: [Order]!
   }
 
   type Query {
-    pizzaSizes: [PizzaSize!]! @requireAuth
+    pizzaSizes(includeUnavailable: Boolean = false): [PizzaSize!]! @requireAuth
     pizzaSize(id: Int!): PizzaSize @requireAuth
   }
 
   input CreatePizzaSizeInput {
     name: String!
-    is_available: Boolean!
+    isAvailable: Boolean!
   }
 
   input UpdatePizzaSizeInput {
     name: String
-    is_available: Boolean
+    isAvailable: Boolean
   }
 
   type Mutation {

@@ -16,33 +16,47 @@ import type { StandardScenario } from './pizzaToppings.scenarios'
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('pizzaToppings', () => {
-  scenario('returns all pizzaToppings', async (scenario: StandardScenario) => {
-    const result = await pizzaToppings()
+  scenario(
+    'returns all available pizzaToppings by default',
+    async (scenario: StandardScenario) => {
+      const result = await pizzaToppings()
 
-    expect(result.length).toEqual(Object.keys(scenario.pizzaTopping).length)
-  })
+      expect(result.length).toEqual(2)
+    }
+  )
+
+  scenario(
+    'returns all toppings if asked for',
+    async (scenario: StandardScenario) => {
+      const result = await pizzaToppings({ includeUnavailable: true })
+
+      expect(result.length).toEqual(3)
+    }
+  )
 
   scenario(
     'returns a single pizzaTopping',
     async (scenario: StandardScenario) => {
-      const result = await pizzaTopping({ id: scenario.pizzaTopping.one.id })
+      const result = await pizzaTopping({
+        id: scenario.pizzaTopping.pepperoni.id,
+      })
 
-      expect(result).toEqual(scenario.pizzaTopping.one)
+      expect(result).toEqual(scenario.pizzaTopping.pepperoni)
     }
   )
 
   scenario('creates a pizzaTopping', async () => {
     const result = await createPizzaTopping({
-      input: { name: 'String1208347', is_available: true },
+      input: { name: 'String1208347', isAvailable: true },
     })
 
     expect(result.name).toEqual('String1208347')
-    expect(result.is_available).toEqual(true)
+    expect(result.isAvailable).toEqual(true)
   })
 
   scenario('updates a pizzaTopping', async (scenario: StandardScenario) => {
     const original = (await pizzaTopping({
-      id: scenario.pizzaTopping.one.id,
+      id: scenario.pizzaTopping.pepperoni.id,
     })) as PizzaTopping
     const result = await updatePizzaTopping({
       id: original.id,
@@ -54,7 +68,7 @@ describe('pizzaToppings', () => {
 
   scenario('deletes a pizzaTopping', async (scenario: StandardScenario) => {
     const original = (await deletePizzaTopping({
-      id: scenario.pizzaTopping.one.id,
+      id: scenario.pizzaTopping.pepperoni.id,
     })) as PizzaTopping
     const result = await pizzaTopping({ id: original.id })
 

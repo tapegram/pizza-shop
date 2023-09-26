@@ -5,15 +5,12 @@ import {
   FormError,
   FieldError,
   Label,
-  NumberField,
   Submit,
   SelectField,
   CheckboxField,
   TextField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
-
-type FormOrder = NonNullable<CreateOrderFormInput>
 
 interface OrderFormProps {
   order?: EditOrderById['order']

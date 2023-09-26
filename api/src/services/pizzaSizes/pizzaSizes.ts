@@ -6,8 +6,12 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const pizzaSizes: QueryResolvers['pizzaSizes'] = () => {
-  return db.pizzaSize.findMany()
+export const pizzaSizes: QueryResolvers['pizzaSizes'] = ({
+  includeUnavailable,
+}) => {
+  return includeUnavailable
+    ? db.pizzaSize.findMany()
+    : db.pizzaSize.findMany({ where: { isAvailable: true } })
 }
 
 export const pizzaSize: QueryResolvers['pizzaSize'] = ({ id }) => {

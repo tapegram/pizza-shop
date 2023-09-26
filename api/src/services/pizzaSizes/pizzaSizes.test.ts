@@ -16,30 +16,42 @@ import type { StandardScenario } from './pizzaSizes.scenarios'
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('pizzaSizes', () => {
-  scenario('returns all pizzaSizes', async (scenario: StandardScenario) => {
-    const result = await pizzaSizes()
+  scenario(
+    'returns all available sizes by default',
+    async (scenario: StandardScenario) => {
+      const result = await pizzaSizes()
 
-    expect(result.length).toEqual(Object.keys(scenario.pizzaSize).length)
-  })
+      expect(result.length).toEqual(2)
+    }
+  )
+
+  scenario(
+    'returns all sizes if asked for',
+    async (scenario: StandardScenario) => {
+      const result = await pizzaSizes({ includeUnavailable: true })
+
+      expect(result.length).toEqual(3)
+    }
+  )
 
   scenario('returns a single pizzaSize', async (scenario: StandardScenario) => {
-    const result = await pizzaSize({ id: scenario.pizzaSize.one.id })
+    const result = await pizzaSize({ id: scenario.pizzaSize.small.id })
 
-    expect(result).toEqual(scenario.pizzaSize.one)
+    expect(result).toEqual(scenario.pizzaSize.small)
   })
 
   scenario('creates a pizzaSize', async () => {
     const result = await createPizzaSize({
-      input: { name: 'String3606803', is_available: true },
+      input: { name: 'String3606803', isAvailable: true },
     })
 
     expect(result.name).toEqual('String3606803')
-    expect(result.is_available).toEqual(true)
+    expect(result.isAvailable).toEqual(true)
   })
 
   scenario('updates a pizzaSize', async (scenario: StandardScenario) => {
     const original = (await pizzaSize({
-      id: scenario.pizzaSize.one.id,
+      id: scenario.pizzaSize.small.id,
     })) as PizzaSize
     const result = await updatePizzaSize({
       id: original.id,
@@ -51,7 +63,7 @@ describe('pizzaSizes', () => {
 
   scenario('deletes a pizzaSize', async (scenario: StandardScenario) => {
     const original = (await deletePizzaSize({
-      id: scenario.pizzaSize.one.id,
+      id: scenario.pizzaSize.small.id,
     })) as PizzaSize
     const result = await pizzaSize({ id: original.id })
 

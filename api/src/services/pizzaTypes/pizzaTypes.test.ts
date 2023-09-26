@@ -16,30 +16,42 @@ import type { StandardScenario } from './pizzaTypes.scenarios'
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('pizzaTypes', () => {
-  scenario('returns all pizzaTypes', async (scenario: StandardScenario) => {
-    const result = await pizzaTypes()
+  scenario(
+    'returns all available pizzaTypes by default',
+    async (scenario: StandardScenario) => {
+      const result = await pizzaTypes()
 
-    expect(result.length).toEqual(Object.keys(scenario.pizzaType).length)
-  })
+      expect(result.length).toEqual(2)
+    }
+  )
+
+  scenario(
+    'returns all types if asked for',
+    async (scenario: StandardScenario) => {
+      const result = await pizzaTypes({ includeUnavailable: true })
+
+      expect(result.length).toEqual(3)
+    }
+  )
 
   scenario('returns a single pizzaType', async (scenario: StandardScenario) => {
-    const result = await pizzaType({ id: scenario.pizzaType.one.id })
+    const result = await pizzaType({ id: scenario.pizzaType.newyork.id })
 
-    expect(result).toEqual(scenario.pizzaType.one)
+    expect(result).toEqual(scenario.pizzaType.newyork)
   })
 
   scenario('creates a pizzaType', async () => {
     const result = await createPizzaType({
-      input: { name: 'String1699195', is_available: true },
+      input: { name: 'String1699195', isAvailable: true },
     })
 
     expect(result.name).toEqual('String1699195')
-    expect(result.is_available).toEqual(true)
+    expect(result.isAvailable).toEqual(true)
   })
 
   scenario('updates a pizzaType', async (scenario: StandardScenario) => {
     const original = (await pizzaType({
-      id: scenario.pizzaType.one.id,
+      id: scenario.pizzaType.newyork.id,
     })) as PizzaType
     const result = await updatePizzaType({
       id: original.id,
@@ -51,7 +63,7 @@ describe('pizzaTypes', () => {
 
   scenario('deletes a pizzaType', async (scenario: StandardScenario) => {
     const original = (await deletePizzaType({
-      id: scenario.pizzaType.one.id,
+      id: scenario.pizzaType.newyork.id,
     })) as PizzaType
     const result = await pizzaType({ id: original.id })
 
