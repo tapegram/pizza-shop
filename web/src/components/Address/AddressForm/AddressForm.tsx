@@ -107,7 +107,7 @@ const AddressForm = (props: AddressFormProps) => {
         <FieldError name="state" className="rw-field-error" />
 
         <Label
-          name="zip"
+          name="zipCode"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
@@ -115,14 +115,14 @@ const AddressForm = (props: AddressFormProps) => {
         </Label>
 
         <TextField
-          name="zip"
-          defaultValue={props.address?.zip}
+          name="zipCode"
+          defaultValue={props.address?.zipCode}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
-        <FieldError name="zip" className="rw-field-error" />
+        <FieldError name="zipCode" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

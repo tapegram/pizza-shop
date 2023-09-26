@@ -15,7 +15,7 @@ export const QUERY = gql`
       streetAddress2
       city
       state
-      zip
+      zipCode
     }
   }
 `
@@ -27,7 +27,7 @@ const UPDATE_ADDRESS_MUTATION = gql`
       streetAddress2
       city
       state
-      zip
+      zipCode
     }
   }
 `

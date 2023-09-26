@@ -45,11 +45,11 @@ const AddressesList = ({ addresses }: FindAddresses) => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Street address 1</th>
-            <th>Street address 2</th>
+            <th>Street Address 1</th>
+            <th>Street Address 2</th>
             <th>City</th>
             <th>State</th>
-            <th>Zip</th>
+            <th>Zip Code</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -61,7 +61,7 @@ const AddressesList = ({ addresses }: FindAddresses) => {
               <td>{truncate(address.streetAddress2)}</td>
               <td>{truncate(address.city)}</td>
               <td>{truncate(address.state)}</td>
-              <td>{truncate(address.zip)}</td>
+              <td>{truncate(address.zipCode)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

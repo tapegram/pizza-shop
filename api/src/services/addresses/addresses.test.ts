@@ -35,7 +35,7 @@ describe('addresses', () => {
         streetAddress2: 'String',
         city: 'String',
         state: 'String',
-        zip: 'String',
+        zipCode: 'String',
       },
     })
 
@@ -43,7 +43,7 @@ describe('addresses', () => {
     expect(result.streetAddress2).toEqual('String')
     expect(result.city).toEqual('String')
     expect(result.state).toEqual('String')
-    expect(result.zip).toEqual('String')
+    expect(result.zipCode).toEqual('String')
   })
 
   scenario('updates a address', async (scenario: StandardScenario) => {

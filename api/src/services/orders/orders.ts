@@ -56,8 +56,8 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
 
   return db.order.create({
     data: {
-      pizzaSizeId: sizeId,
-      pizzaTypeId: styleId,
+      pizzaSize: { connect: { id: sizeId } },
+      pizzaType: { connect: { id: styleId } },
       pizzaToppings: {
         connect: toppings.map((id) => ({ id })),
       },
@@ -77,7 +77,7 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
                 streetAddress2: address.streetAddress2,
                 city: address.city,
                 state: address.state,
-                zip: address.zipCode,
+                zipCode: address.zipCode,
               },
             },
           },
@@ -98,6 +98,7 @@ const validateAndFormatAddress = (
   if (!delivery) {
     return null
   }
+
   validate(streetAddress1, 'Street Address 1', {
     presence: true,
     length: { min: 2 }, // Requring at least a couple characters

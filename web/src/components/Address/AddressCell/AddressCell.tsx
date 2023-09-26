@@ -12,7 +12,7 @@ export const QUERY = gql`
       streetAddress2
       city
       state
-      zip
+      zipCode
     }
   }
 `

@@ -10,7 +10,7 @@ export const standard = defineScenario<Prisma.AddressCreateArgs>({
         streetAddress2: 'String',
         city: 'String',
         state: 'String',
-        zip: 'String',
+        zipCode: 'String',
       },
     },
     two: {
@@ -19,7 +19,7 @@ export const standard = defineScenario<Prisma.AddressCreateArgs>({
         streetAddress2: 'String',
         city: 'String',
         state: 'String',
-        zip: 'String',
+        zipCode: 'String',
       },
     },
   },

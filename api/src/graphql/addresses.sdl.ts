@@ -5,7 +5,7 @@ export const schema = gql`
     streetAddress2: String!
     city: String!
     state: String!
-    zip: String!
+    zipCode: String!
     Delivery: [Delivery]!
   }
 
@@ -19,7 +19,7 @@ export const schema = gql`
     streetAddress2: String!
     city: String!
     state: String!
-    zip: String!
+    zipCode: String!
   }
 
   input UpdateAddressInput {
@@ -27,7 +27,7 @@ export const schema = gql`
     streetAddress2: String
     city: String
     state: String
-    zip: String
+    zipCode: String
   }
 
   type Mutation {

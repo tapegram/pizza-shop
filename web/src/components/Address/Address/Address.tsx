@@ -69,8 +69,8 @@ const Address = ({ address }: Props) => {
               <td>{address.state}</td>
             </tr>
             <tr>
-              <th>Zip</th>
-              <td>{address.zip}</td>
+              <th>Zip Code</th>
+              <td>{address.zipCode}</td>
             </tr>
           </tbody>
         </table>

@@ -45,7 +45,6 @@ const OrderForm = (props: OrderFormProps) => {
       ...data,
       toppings: data.toppings.map((topping: string) => parseInt(topping)),
     }
-    console.log
     props.onSave(castInput)
   }
 
@@ -116,7 +115,6 @@ const OrderForm = (props: OrderFormProps) => {
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{
-            required: true,
             valueAsNumber: true,
           }}
           multiple={true}
@@ -256,19 +254,19 @@ const OrderForm = (props: OrderFormProps) => {
             <FieldError name="state" className="rw-field-error" />
 
             <Label
-              name="zip"
+              name="zipCode"
               className="rw-label"
               errorClassName="rw-label rw-label-error"
             >
               Zip
             </Label>
             <TextField
-              name="zip"
+              name="zipCode"
               className="rw-input"
               errorClassName="rw-input rw-input-error"
               validation={{ required: true }}
             />
-            <FieldError name="zip" className="rw-field-error" />
+            <FieldError name="zipCode" className="rw-field-error" />
           </span>
         )}
         <div className="rw-button-group">
