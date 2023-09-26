@@ -18,6 +18,8 @@ const Routes = () => {
     <Router>
       <Set wrap={Layout}>
         <Route path="/create-order" page={CreateOrderPage} name="createOrder" />
+        <Route path="/orders/{id:Int}" page={OrderOrderPage} name="order" />
+        <Route path="/orders" page={OrderOrdersPage} name="orders" />
       </Set>
       <Set wrap={ScaffoldLayout} title="PizzaSizes" titleTo="pizzaSizes" buttonLabel="New PizzaSize" buttonTo="newPizzaSize">
         <Route path="/pizza-sizes/new" page={PizzaSizeNewPizzaSizePage} name="newPizzaSize" />
@@ -52,8 +54,6 @@ const Routes = () => {
       <Set wrap={ScaffoldLayout} title="Orders" titleTo="orders" buttonLabel="New Order" buttonTo="newOrder">
         <Route path="/orders/new" page={OrderNewOrderPage} name="newOrder" />
         <Route path="/orders/{id:Int}/edit" page={OrderEditOrderPage} name="editOrder" />
-        <Route path="/orders/{id:Int}" page={OrderOrderPage} name="order" />
-        <Route path="/orders" page={OrderOrdersPage} name="orders" />
       </Set>
       <Set wrap={ScaffoldLayout} title="PizzaToppings" titleTo="pizzaToppings" buttonLabel="New PizzaTopping" buttonTo="newPizzaTopping">
         <Route path="/pizza-toppings/new" page={PizzaToppingNewPizzaToppingPage} name="newPizzaTopping" />

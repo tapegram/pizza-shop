@@ -9,12 +9,22 @@ export const QUERY = gql`
   query FindOrders {
     orders {
       id
-      customerInfoId
-      deliveryId
-      pizzaTypeId
-      pizzaSizeId
+      customerInfo {
+        email
+        name
+        phone
+      }
       createdAt
-      updatedAt
+      deliveryId
+      pizzaSize {
+        name
+      }
+      pizzaType {
+        name
+      }
+      pizzaToppings {
+        name
+      }
     }
   }
 `

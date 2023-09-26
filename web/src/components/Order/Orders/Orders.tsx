@@ -1,11 +1,11 @@
+import type { DeleteOrderMutationVariables, FindOrders } from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Order/OrdersCell'
 import { timeTag, truncate } from 'src/lib/formatters'
-
-import type { DeleteOrderMutationVariables, FindOrders } from 'types/graphql'
 
 const DELETE_ORDER_MUTATION = gql`
   mutation DeleteOrderMutation($id: Int!) {
@@ -41,26 +41,25 @@ const OrdersList = ({ orders }: FindOrders) => {
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Customer info id</th>
-            <th>Delivery id</th>
-            <th>Pizza type id</th>
-            <th>Pizza size id</th>
-            <th>Created at</th>
-            <th>Updated at</th>
+            <th>Ordered</th>
+            <th>Customer</th>
+            <th>Delivery Or Pickup</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
             <tr key={order.id}>
-              <td>{truncate(order.id)}</td>
-              <td>{truncate(order.customerInfoId)}</td>
-              <td>{truncate(order.deliveryId)}</td>
-              <td>{truncate(order.pizzaTypeId)}</td>
-              <td>{truncate(order.pizzaSizeId)}</td>
-              <td>{timeTag(order.createdAt)}</td>
-              <td>{timeTag(order.updatedAt)}</td>
+              <td>
+                {truncate(
+                  new Date(order.createdAt).toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                  })
+                )}
+              </td>
+              <td>{truncate(order.customerInfo.name)}</td>
+              <td>{truncate(order.deliveryId ? 'Delivery' : 'Pickup')}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
@@ -70,21 +69,6 @@ const OrdersList = ({ orders }: FindOrders) => {
                   >
                     Show
                   </Link>
-                  <Link
-                    to={routes.editOrder({ id: order.id })}
-                    title={'Edit order ' + order.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={'Delete order ' + order.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(order.id)}
-                  >
-                    Delete
-                  </button>
                 </nav>
               </td>
             </tr>
