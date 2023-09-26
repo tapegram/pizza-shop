@@ -70,19 +70,22 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
       },
       delivery: delivery
         ? {
-          create: {
-            address: {
-              create: {
-                streetAddress1: address.streetAddress1,
-                streetAddress2: address.streetAddress2,
-                city: address.city,
-                state: address.state,
-                zipCode: address.zipCode,
+            create: {
+              address: {
+                create: {
+                  streetAddress1: address.streetAddress1,
+                  streetAddress2: address.streetAddress2,
+                  city: address.city,
+                  state: address.state,
+                  zipCode: address.zipCode,
+                },
               },
             },
-          },
-        }
+          }
         : {},
+    },
+    include: {
+      pizzaToppings: true,
     },
   })
 }
