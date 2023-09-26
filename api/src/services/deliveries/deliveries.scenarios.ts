@@ -8,7 +8,7 @@ export const standard = defineScenario<Prisma.DeliveryCreateArgs>({
       data: {
         address: {
           create: {
-            streeAddress1: 'String',
+            streetAddress1: 'String',
             streetAddress2: 'String',
             city: 'String',
             state: 'String',

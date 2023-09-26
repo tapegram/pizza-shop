@@ -19,7 +19,7 @@ describe('pizzaToppings', () => {
   scenario(
     'returns all available pizzaToppings by default',
     async (scenario: StandardScenario) => {
-      const result = await pizzaToppings()
+      const result = await pizzaToppings({ includeUnavailable: false })
 
       expect(result.length).toEqual(2)
     }

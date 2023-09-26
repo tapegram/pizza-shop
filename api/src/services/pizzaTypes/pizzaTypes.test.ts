@@ -19,7 +19,7 @@ describe('pizzaTypes', () => {
   scenario(
     'returns all available pizzaTypes by default',
     async (scenario: StandardScenario) => {
-      const result = await pizzaTypes()
+      const result = await pizzaTypes({ includeUnavailable: false })
 
       expect(result.length).toEqual(2)
     }
