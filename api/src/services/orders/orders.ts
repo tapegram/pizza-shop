@@ -44,15 +44,16 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
   const phoneNumber = validateAndFormatPhoneNumber(input.customerPhoneNumber)
   const email = validateAndFormatEmail(input.customerEmail)
   const delivery: boolean = input.delivery
-  const address: Address | null = delivery
-    ? null
-    : validateAndFormatAddress(
-      input.streetAddress1,
-      input.streetAddress2,
-      input.city,
-      input.state,
-      input.zipCode
-    )
+  console.log('delivery', delivery)
+  const address: Address | null = validateAndFormatAddress(
+    delivery,
+    input.streetAddress1,
+    input.streetAddress2,
+    input.city,
+    input.state,
+    input.zipCode
+  )
+
   return db.order.create({
     data: {
       pizzaSizeId: sizeId,
@@ -81,18 +82,22 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
             },
           },
         }
-        : null,
+        : {},
     },
   })
 }
 
 const validateAndFormatAddress = (
+  delivery: boolean,
   streetAddress1: string,
   streetAddress2: string | null,
   city: string,
   state: string,
   zipCode: string
 ) => {
+  if (!delivery) {
+    return null
+  }
   validate(streetAddress1, 'Street Address 1', {
     presence: true,
     length: { min: 2 }, // Requring at least a couple characters

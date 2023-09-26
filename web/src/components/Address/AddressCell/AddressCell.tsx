@@ -8,8 +8,8 @@ export const QUERY = gql`
   query FindAddressById($id: Int!) {
     address: address(id: $id) {
       id
-      street_address_1
-      street_address_2
+      streetAddress1
+      streetAddress2
       city
       state
       zip

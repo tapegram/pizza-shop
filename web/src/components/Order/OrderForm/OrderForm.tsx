@@ -196,34 +196,34 @@ const OrderForm = (props: OrderFormProps) => {
         {delivery && (
           <span>
             <Label
-              name="street_address_1"
+              name="streetAddress1"
               className="rw-label"
               errorClassName="rw-label rw-label-error"
             >
               Street Address
             </Label>
             <TextField
-              name="street_address_1"
+              name="streetAddress1"
               className="rw-input"
               errorClassName="rw-input rw-input-error"
               validation={{ required: true }}
             />
-            <FieldError name="street_address_1" className="rw-field-error" />
+            <FieldError name="streetAddress1" className="rw-field-error" />
 
             <Label
-              name="street_address_2"
+              name="streetAddress2"
               className="rw-label"
               errorClassName="rw-label rw-label-error"
             >
               Street Address Line 2
             </Label>
             <TextField
-              name="street_address_2"
+              name="streetAddress2"
               className="rw-input"
               errorClassName="rw-input rw-input-error"
               validation={{ required: false }}
             />
-            <FieldError name="street_address_2" className="rw-field-error" />
+            <FieldError name="streetAddress2" className="rw-field-error" />
 
             <Label
               name="city"

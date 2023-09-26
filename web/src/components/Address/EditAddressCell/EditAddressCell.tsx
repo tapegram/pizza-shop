@@ -11,8 +11,8 @@ export const QUERY = gql`
   query EditAddressById($id: Int!) {
     address: address(id: $id) {
       id
-      street_address_1
-      street_address_2
+      streetAddress1
+      streetAddress2
       city
       state
       zip
@@ -23,8 +23,8 @@ const UPDATE_ADDRESS_MUTATION = gql`
   mutation UpdateAddressMutation($id: Int!, $input: UpdateAddressInput!) {
     updateAddress(id: $id, input: $input) {
       id
-      street_address_1
-      street_address_2
+      streetAddress1
+      streetAddress2
       city
       state
       zip

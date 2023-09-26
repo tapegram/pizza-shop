@@ -9,8 +9,8 @@ export const QUERY = gql`
   query FindAddresses {
     addresses {
       id
-      street_address_1
-      street_address_2
+      streetAddress1
+      streetAddress2
       city
       state
       zip

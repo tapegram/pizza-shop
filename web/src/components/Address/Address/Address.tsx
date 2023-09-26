@@ -2,7 +2,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import {} from 'src/lib/formatters'
+import { } from 'src/lib/formatters'
 
 import type {
   DeleteAddressMutationVariables,
@@ -54,11 +54,11 @@ const Address = ({ address }: Props) => {
             </tr>
             <tr>
               <th>Street address 1</th>
-              <td>{address.street_address_1}</td>
+              <td>{address.streetAddress1}</td>
             </tr>
             <tr>
               <th>Street address 2</th>
-              <td>{address.street_address_2}</td>
+              <td>{address.streetAddress2}</td>
             </tr>
             <tr>
               <th>City</th>

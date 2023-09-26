@@ -1,14 +1,14 @@
+import type {
+  DeleteAddressMutationVariables,
+  FindAddresses,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Address/AddressesCell'
 import { truncate } from 'src/lib/formatters'
-
-import type {
-  DeleteAddressMutationVariables,
-  FindAddresses,
-} from 'types/graphql'
 
 const DELETE_ADDRESS_MUTATION = gql`
   mutation DeleteAddressMutation($id: Int!) {
@@ -57,8 +57,8 @@ const AddressesList = ({ addresses }: FindAddresses) => {
           {addresses.map((address) => (
             <tr key={address.id}>
               <td>{truncate(address.id)}</td>
-              <td>{truncate(address.street_address_1)}</td>
-              <td>{truncate(address.street_address_2)}</td>
+              <td>{truncate(address.streetAddress1)}</td>
+              <td>{truncate(address.streetAddress2)}</td>
               <td>{truncate(address.city)}</td>
               <td>{truncate(address.state)}</td>
               <td>{truncate(address.zip)}</td>

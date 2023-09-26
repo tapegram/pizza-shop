@@ -1,3 +1,5 @@
+import type { EditAddressById, UpdateAddressInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -6,8 +8,6 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type { EditAddressById, UpdateAddressInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
 
 type FormAddress = NonNullable<EditAddressById['address']>
@@ -35,7 +35,7 @@ const AddressForm = (props: AddressFormProps) => {
         />
 
         <Label
-          name="street_address_1"
+          name="streetAddress1"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
@@ -43,17 +43,17 @@ const AddressForm = (props: AddressFormProps) => {
         </Label>
 
         <TextField
-          name="street_address_1"
-          defaultValue={props.address?.street_address_1}
+          name="streetAddress1"
+          defaultValue={props.address?.streetAddress1}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
-        <FieldError name="street_address_1" className="rw-field-error" />
+        <FieldError name="streetAddress1" className="rw-field-error" />
 
         <Label
-          name="street_address_2"
+          name="streetAddress2"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
@@ -61,14 +61,14 @@ const AddressForm = (props: AddressFormProps) => {
         </Label>
 
         <TextField
-          name="street_address_2"
-          defaultValue={props.address?.street_address_2}
+          name="streetAddress2"
+          defaultValue={props.address?.streetAddress2}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
-        <FieldError name="street_address_2" className="rw-field-error" />
+        <FieldError name="streetAddress2" className="rw-field-error" />
 
         <Label
           name="city"
