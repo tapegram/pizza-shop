@@ -270,12 +270,40 @@ export const deleteOrder: MutationResolvers['deleteOrder'] = ({ id }) => {
   })
 }
 
-const calculateNextStatus = (order) => {
-  return OrderStatus.IN_PROGRESS
+export const calculateNextStatus = (
+  currentStatus: string,
+  isDelivery: boolean
+) => {
+  if (currentStatus === OrderStatus.CANCELED) {
+    return null
+  }
+
+  if (currentStatus === OrderStatus.DONE) {
+    return null
+  }
+
+  if (currentStatus === OrderStatus.NEW) {
+    return OrderStatus.IN_PROGRESS
+  }
+
+  if (currentStatus === OrderStatus.IN_PROGRESS) {
+    if (isDelivery) {
+      return OrderStatus.OUT_FOR_DELIVERY
+    } else {
+      return OrderStatus.READY_FOR_PICKUP
+    }
+  }
+
+  return OrderStatus.DONE
 }
+
+const isDeliveryOrder = (order) => {
+  return order.deliveryId !== null
+}
+
 export const Order: OrderRelationResolvers = {
   nextStatus: (_obj, { root }) => {
-    return calculateNextStatus(root)
+    return calculateNextStatus(root.status, isDeliveryOrder(root))
   },
   customerInfo: (_obj, { root }) => {
     return db.order.findUnique({ where: { id: root?.id } }).customerInfo()

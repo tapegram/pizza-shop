@@ -8,6 +8,8 @@ import {
   updateOrder,
   deleteOrder,
   cancelOrder,
+  OrderStatus,
+  calculateNextStatus,
 } from './orders'
 import type { StandardScenario } from './orders.scenarios'
 
@@ -37,7 +39,7 @@ describe('orders', () => {
         input,
       })
 
-      expect(result.status).toEqual('new')
+      expect(result.status).toEqual(OrderStatus.NEW)
       expect(result.customerInfoId).not.toBeNull()
       expect(result.pizzaTypeId).toEqual(scenario.pizzaType.newyork.id)
       expect(result.pizzaSizeId).toEqual(scenario.pizzaSize.small.id)
@@ -105,11 +107,39 @@ describe('orders', () => {
       'can cancel a canceled order (should do nothing)',
       async (scenario: StandardScenario) => {
         const result = await cancelOrder({
-          id: scenario.order.new.id,
+          id: scenario.order.canceled.id,
         })
 
         expect(result.status).toEqual('canceled')
       }
     )
+  })
+
+  describe('next status', () => {
+    scenario('test next statuses', async (scenario: StandardScenario) => {
+      expect(calculateNextStatus(OrderStatus.NEW, false)).toEqual(
+        OrderStatus.IN_PROGRESS
+      )
+      expect(calculateNextStatus(OrderStatus.IN_PROGRESS, false)).toEqual(
+        OrderStatus.READY_FOR_PICKUP
+      )
+      expect(calculateNextStatus(OrderStatus.READY_FOR_PICKUP, false)).toEqual(
+        OrderStatus.DONE
+      )
+      expect(calculateNextStatus(OrderStatus.DONE, false)).toBeNull()
+      expect(calculateNextStatus(OrderStatus.CANCELED, false)).toBeNull()
+
+      expect(calculateNextStatus(OrderStatus.NEW, true)).toEqual(
+        OrderStatus.IN_PROGRESS
+      )
+      expect(calculateNextStatus(OrderStatus.IN_PROGRESS, true)).toEqual(
+        OrderStatus.OUT_FOR_DELIVERY
+      )
+      expect(calculateNextStatus(OrderStatus.OUT_FOR_DELIVERY, true)).toEqual(
+        OrderStatus.DONE
+      )
+      expect(calculateNextStatus(OrderStatus.DONE, true)).toBeNull()
+      expect(calculateNextStatus(OrderStatus.CANCELED, true)).toBeNull()
+    })
   })
 })
