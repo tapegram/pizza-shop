@@ -4,11 +4,42 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { PlusIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
+import { Link, routes } from '@redwoodjs/router'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+const navItemActiveClasses =
+  'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+const navItemInactiveClasses =
+  'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+
+const navItems = [
+  { name: 'Orders', onClick: () => routes.orders() },
+  { name: 'Toppings', onClick: () => routes.pizzaToppings() },
+  { name: 'Sizes', onClick: () => routes.pizzaSizes() },
+  { name: 'Types', onClick: () => routes.pizzaTypes() },
+]
+
+const NavItem = ({ isActive, name, onClick }) => (
+  <Link
+    to={onClick()}
+    className={isActive ? navItemActiveClasses : navItemInactiveClasses}
+  >
+    {name}
+  </Link>
+)
+
+const NavItemButton = ({ isActive, name, onClick }) => (
+  <Link
+    to={onClick()}
+    className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
+  >
+    {name}
+  </Link>
+)
+
+const Navbar = () => {
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -28,39 +59,15 @@ export default function Example() {
                     )}
                   </Disclosure.Button>
                 </div>
-                {/* <div className="flex flex-shrink-0 items-center"> */}
-                {/*   <img */}
-                {/*     className="h-8 w-auto" */}
-                {/*     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" */}
-                {/*     alt="Your Company" */}
-                {/*   /> */}
-                {/* </div> */}
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
-                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
-                  >
-                    Dashboard
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Team
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Projects
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Calendar
-                  </a>
+                  {navItems.map((item) => (
+                    <NavItem
+                      key={item.name}
+                      isActive={false}
+                      name={item.name}
+                      onClick={item.onClick}
+                    />
+                  ))}
                 </div>
               </div>
               <div className="flex items-center">
@@ -155,35 +162,14 @@ export default function Example() {
 
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 pb-3 pt-2">
-              {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700 sm:pl-5 sm:pr-6"
-              >
-                Dashboard
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
-              >
-                Team
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
-              >
-                Projects
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
-              >
-                Calendar
-              </Disclosure.Button>
+              {navItems.map((item) => (
+                <NavItemButton
+                  key={item.name}
+                  isActive={false}
+                  name={item.name}
+                  onClick={item.onClick}
+                />
+              ))}
             </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4 sm:px-6">
@@ -241,3 +227,5 @@ export default function Example() {
     </Disclosure>
   )
 }
+
+export default Navbar
