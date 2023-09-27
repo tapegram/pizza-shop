@@ -1,0 +1,29 @@
+# Use postgres/example user/password credentials
+# https://hub.docker.com/_/postgres
+version: '3.1'
+
+services:
+  localpostgres:
+    container_name: localpostgres
+    image: postgres:15.1
+    restart: always
+    ports:
+      - 15432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: wcapp
+      POSTGRES_USER: admin
+
+  localpostgres-test:
+    container_name: localpostgres-test
+    image: postgres:15.1
+    restart: always
+    ports:
+      - 15433:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: wcapp-test
+      POSTGRES_USER: admin
+
+volumes:
+  pgdata:

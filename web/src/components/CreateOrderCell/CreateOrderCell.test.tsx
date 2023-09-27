@@ -35,7 +35,7 @@ describe('CreateOrderCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success createOrder={standard().createOrder} />)
+      render(<Success pizzaSizes={[]} pizzaTypes={[]} pizzaToppings={[]} />)
     }).not.toThrow()
   })
 })
