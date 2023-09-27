@@ -4,7 +4,7 @@ type LayoutProps = {
   children: React.ReactNode
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const CustomerLayout = ({ children }: LayoutProps) => {
   return (
     <div className="rw-scaffold">
       <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
@@ -13,4 +13,4 @@ const Layout = ({ children }: LayoutProps) => {
   )
 }
 
-export default Layout
+export default CustomerLayout

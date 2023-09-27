@@ -11,16 +11,16 @@ import { Set, Router, Route } from '@redwoodjs/router'
 
 import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
-import Layout from './layouts/ScaffoldLayout/Layout'
+import CustomerLayout from './layouts/CustomerLayout'
 
 const Routes = () => {
   return (
     <Router>
-      <Set wrap={Layout}>
+      <Set wrap={CustomerLayout}>
         <Route path="/orders" page={CreateOrderPage} name="createOrder" />
         <Route path="/orders/{id:Int}" page={OrderCustomerOrderPage} name="customerOrder" />
       </Set>
-      <Set wrap={Layout}>
+      <Set wrap={ShopLayout}>
         <Route path="/shop/orders/{id:Int}" page={OrderShopOrderPage} name="shopOrder" />
         <Route path="/shop/orders" page={OrderOrdersPage} name="orders" />
       </Set>
