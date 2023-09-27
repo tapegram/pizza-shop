@@ -270,7 +270,13 @@ export const deleteOrder: MutationResolvers['deleteOrder'] = ({ id }) => {
   })
 }
 
+const calculateNextStatus = (order) => {
+  return OrderStatus.IN_PROGRESS
+}
 export const Order: OrderRelationResolvers = {
+  nextStatus: (_obj, { root }) => {
+    return calculateNextStatus(root)
+  },
   customerInfo: (_obj, { root }) => {
     return db.order.findUnique({ where: { id: root?.id } }).customerInfo()
   },
