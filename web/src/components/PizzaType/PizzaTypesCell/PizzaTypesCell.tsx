@@ -7,7 +7,7 @@ import PizzaTypes from 'src/components/PizzaType/PizzaTypes'
 
 export const QUERY = gql`
   query FindPizzaTypes {
-    pizzaTypes {
+    pizzaTypes(includeUnavailable: true) {
       id
       name
       isAvailable

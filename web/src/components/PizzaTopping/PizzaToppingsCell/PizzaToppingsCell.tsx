@@ -7,7 +7,7 @@ import PizzaToppings from 'src/components/PizzaTopping/PizzaToppings'
 
 export const QUERY = gql`
   query FindPizzaToppings {
-    pizzaToppings {
+    pizzaToppings(includeUnavailable: true) {
       id
       name
       isAvailable

@@ -7,7 +7,7 @@ import PizzaSizes from 'src/components/PizzaSize/PizzaSizes'
 
 export const QUERY = gql`
   query FindPizzaSizes {
-    pizzaSizes {
+    pizzaSizes(includeUnavailable: true) {
       id
       name
       isAvailable
