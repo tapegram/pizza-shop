@@ -8,10 +8,30 @@ export const QUERY = gql`
   query FindOrderById($id: Int!) {
     order: order(id: $id) {
       id
-      customerInfoId
-      deliveryId
-      pizzaTypeId
-      pizzaSizeId
+      status
+      customerInfo {
+        name
+        email
+        phone
+      }
+      delivery {
+        address {
+          streetAddress1
+          streetAddress2
+          city
+          state
+          zipCode
+        }
+      }
+      pizzaType {
+        name
+      }
+      pizzaSize {
+        name
+      }
+      pizzaToppings {
+        name
+      }
       createdAt
       updatedAt
     }
