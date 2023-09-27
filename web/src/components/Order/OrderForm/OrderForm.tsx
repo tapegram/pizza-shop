@@ -72,7 +72,9 @@ const OrderForm = (props: OrderFormProps) => {
           validation={{ required: true, valueAsNumber: true }}
         >
           {props.types.map((type) => (
-            <option value={type.id}>{type.name}</option>
+            <option key={type.id} value={type.id}>
+              {type.name}
+            </option>
           ))}
         </SelectField>
 
@@ -93,7 +95,9 @@ const OrderForm = (props: OrderFormProps) => {
           validation={{ required: true, valueAsNumber: true }}
         >
           {props.sizes.map((size) => (
-            <option value={size.id}>{size.name}</option>
+            <option key={size.id} value={size.id}>
+              {size.name}
+            </option>
           ))}
         </SelectField>
 
