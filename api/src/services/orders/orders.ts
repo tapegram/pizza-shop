@@ -266,6 +266,31 @@ export const cancelOrder: MutationResolvers['cancelOrder'] = async ({ id }) => {
   })
 }
 
+export const advanceOrderStatus: MutationResolvers['advanceOrderStatus'] =
+  async ({ id }) => {
+    const order = await db.order.findUnique({
+      where: { id },
+    })
+
+    validate(order, 'Order', {
+      presence: true,
+    })
+
+    const nextStatus = calculateNextStatus(order.status, isDeliveryOrder(order))
+
+    if (!nextStatus) {
+      // We shouldn't give users the opportunity to encounter this error
+      throw 'This order can not be updated'
+    }
+
+    return db.order.update({
+      data: {
+        status: nextStatus,
+      },
+      where: { id },
+    })
+  }
+
 export const deleteOrder: MutationResolvers['deleteOrder'] = ({ id }) => {
   return db.order.delete({
     where: { id },

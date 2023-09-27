@@ -48,5 +48,6 @@ export const schema = gql`
     updateOrder(id: Int!, input: UpdateOrderInput!): Order! @requireAuth
     deleteOrder(id: Int!): Order! @requireAuth
     cancelOrder(id: Int!): Order! @requireAuth
+    advanceOrderStatus(id: Int!): Order! @requireAuth
   }
 `

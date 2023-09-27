@@ -21,12 +21,30 @@ const CANCEL_ORDER_MUTATION = gql`
   }
 `
 
+const ADVANCE_ORDER_STATUS_MUTATION = gql`
+  mutation AdvanceOrderStatusMutation($id: Int!) {
+    advanceOrderStatus(id: $id) {
+      id
+    }
+  }
+`
+
 const ShopOrder = ({ order }: Props) => {
   const [status, setStatus] = React.useState(order.status)
   const [cancelOrder] = useMutation(CANCEL_ORDER_MUTATION, {
     onCompleted: () => {
       toast.success('Order canceled')
       setStatus('CANCELED')
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+  const [advanceOrderStatus] = useMutation(ADVANCE_ORDER_STATUS_MUTATION, {
+    onCompleted: () => {
+      toast.success('Order updated!')
+      // Could get out of sync with server. Might be worth doing a full refresh of the order
+      setStatus(order.nextStatus)
     },
     onError: (error) => {
       toast.error(error.message)
@@ -40,9 +58,7 @@ const ShopOrder = ({ order }: Props) => {
   }
 
   const onNextStatusClick = (id: AdvanceOrderStatusMutationVariables['id']) => {
-    // if (confirm('Are you sure you want to cancel this order?')) {
-    //   cancelOrder({ variables: { id } })
-    // }
+    advanceOrderStatus({ variables: { id } })
   }
 
   return (
@@ -72,7 +88,7 @@ const ShopOrder = ({ order }: Props) => {
                 <td>
                   <button
                     type="button"
-                    className="rw-button rw-button-red"
+                    className="rw-button rw-button-green"
                     onClick={() => onNextStatusClick(order.id)}
                   >
                     MARK {order.nextStatus}
