@@ -12,6 +12,7 @@ import { Set, Router, Route } from '@redwoodjs/router'
 import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import CustomerLayout from './layouts/CustomerLayout'
+import ShopLayout from './layouts/ShopLayout'
 
 const Routes = () => {
   return (
