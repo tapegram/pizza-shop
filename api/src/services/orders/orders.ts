@@ -18,6 +18,16 @@ type Address = {
   state: string
   zipCode: string
 }
+
+export enum OrderStatus {
+  NEW = 'new',
+  IN_PROGRESS = 'in_progress',
+  OUT_FOR_DELIVERY = 'out_for_delivery',
+  READY_FOR_PICKUP = 'ready_for_pickup',
+  DONE = 'done',
+  CANCELED = 'canceled',
+}
+
 export const orders: QueryResolvers['orders'] = () => {
   return db.order.findMany()
 }
@@ -61,7 +71,7 @@ export const createOrder: MutationResolvers['createOrder'] = async ({
       pizzaToppings: {
         connect: toppings.map((id) => ({ id })),
       },
-      status: 'new',
+      status: OrderStatus.NEW,
       customerInfo: {
         create: {
           name: customerName,
@@ -225,6 +235,27 @@ export const updateOrder: MutationResolvers['updateOrder'] = ({
 }) => {
   return db.order.update({
     data: input,
+    where: { id },
+  })
+}
+
+export const cancelOrder: MutationResolvers['cancelOrder'] = async ({ id }) => {
+  const order = await db.order.findUnique({ where: { id } })
+
+  validate(order, 'Order', {
+    presence: true,
+  })
+
+  await validateWith(async () => {
+    if (order.status === OrderStatus.DONE) {
+      throw 'Sorry, the order is already complete. Canceling is not possible'
+    }
+  })
+
+  return db.order.update({
+    data: {
+      status: OrderStatus.CANCELED,
+    },
     where: { id },
   })
 }

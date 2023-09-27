@@ -1,7 +1,14 @@
 import type { Order } from '@prisma/client'
 import { CreateOrderFormInput } from 'types/graphql'
 
-import { orders, order, createOrder, updateOrder, deleteOrder } from './orders'
+import {
+  orders,
+  order,
+  createOrder,
+  updateOrder,
+  deleteOrder,
+  cancelOrder,
+} from './orders'
 import type { StandardScenario } from './orders.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
@@ -72,5 +79,26 @@ describe('orders', () => {
         scenario.pizzaTopping.onion.name,
       ])
     })
+  })
+
+  describe('cancel an order', () => {
+    scenario('can cancel a new order', async (scenario: StandardScenario) => {
+      const result = await cancelOrder({
+        id: scenario.order.new.id,
+      })
+
+      expect(result.status).toEqual('canceled')
+    })
+
+    scenario(
+      'can not cancel a completed order',
+      async (scenario: StandardScenario) => {
+        await expect(
+          cancelOrder({
+            id: scenario.order.done.id,
+          })
+        ).rejects.toThrow()
+      }
+    )
   })
 })

@@ -3,6 +3,8 @@ import { PizzaSize, PizzaTopping, PizzaType } from 'types/graphql'
 
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
+import { OrderStatus } from './orders'
+
 export const standard = defineScenario<
   | Prisma.PizzaSizeCreateArgs
   | Prisma.PizzaToppingCreateArgs
@@ -24,25 +26,95 @@ export const standard = defineScenario<
     sicilian: { data: { id: 2, name: 'Sicilian', isAvailable: true } },
     stlouis: { data: { id: 3, name: 'St Louis', isAvailable: false } },
   },
-  // Not currently fetching / editing orders, so deferring tests
-  // order: {
-  //   one: {
-  //     data: {
-  //       customerInfoId: 8135628,
-  //       updatedAt: '2023-09-25T15:47:40.750Z',
-  //       pizzaType: { create: { name: 'String1670666', isAvailable: true } },
-  //       pizzaSize: { create: { name: 'String1426660', isAvailable: true } },
-  //     },
-  //   },
-  //   two: {
-  //     data: {
-  //       customerInfoId: 7470297,
-  //       updatedAt: '2023-09-25T15:47:40.750Z',
-  //       pizzaType: { create: { name: 'String57198', isAvailable: true } },
-  //       pizzaSize: { create: { name: 'String7891943', isAvailable: true } },
-  //     },
-  //   },
-  // },
+  order: {
+    new: {
+      data: {
+        status: OrderStatus.NEW,
+        pizzaSize: { connect: { id: 1 } },
+        pizzaType: { connect: { id: 1 } },
+        pizzaToppings: {
+          connect: [{ id: 1 }, { id: 2 }],
+        },
+        customerInfo: {
+          create: {
+            name: 'Joe Pizza',
+            email: 'joepizza@me.com',
+            phone: '410-555-5555',
+          },
+        },
+        delivery: {
+          create: {
+            address: {
+              create: {
+                streetAddress1: '123 Fake St',
+                city: 'Baltimore',
+                state: 'MD',
+                zipCode: '21212',
+              },
+            },
+          },
+        },
+      },
+    },
+    done: {
+      data: {
+        status: OrderStatus.DONE,
+        pizzaSize: { connect: { id: 1 } },
+        pizzaType: { connect: { id: 1 } },
+        pizzaToppings: {
+          connect: [{ id: 1 }, { id: 2 }],
+        },
+        customerInfo: {
+          create: {
+            name: 'Joe Pizza',
+            email: 'joepizza@me.com',
+            phone: '410-555-5555',
+          },
+        },
+        delivery: {
+          create: {
+            address: {
+              create: {
+                streetAddress1: '123 Fake St',
+                city: 'Baltimore',
+                state: 'MD',
+                zipCode: '21212',
+              },
+            },
+          },
+        },
+      },
+    },
+    canceled: {
+      data: {
+        status: OrderStatus.CANCELED,
+        pizzaSize: { connect: { id: 1 } },
+        pizzaType: { connect: { id: 1 } },
+        pizzaToppings: {
+          connect: [{ id: 1 }, { id: 2 }],
+        },
+        customerInfo: {
+          create: {
+            name: 'Joe Pizza',
+            email: 'joepizza@me.com',
+            phone: '410-555-5555',
+          },
+        },
+        delivery: {
+          create: {
+            address: {
+              create: {
+                streetAddress1: '123 Fake St',
+                city: 'Baltimore',
+                state: 'MD',
+                zipCode: '21212',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 })
 
 export type StandardScenario = typeof standard
