@@ -24,25 +24,24 @@ const Routes = () => {
       <Set wrap={ShopLayout}>
         <Route path="/shop/orders/{id:Int}" page={OrderShopOrderPage} name="shopOrder" />
         <Route path="/shop/orders" page={OrderOrdersPage} name="orders" />
-
-        <Set wrap={ScaffoldLayout} title="Pizza Sizes" titleTo="pizzaSizes" buttonLabel="New Size" buttonTo="newPizzaSize">
-          <Route path="/pizza-sizes/new" page={PizzaSizeNewPizzaSizePage} name="newPizzaSize" />
-          <Route path="/pizza-sizes/{id:Int}/edit" page={PizzaSizeEditPizzaSizePage} name="editPizzaSize" />
-          <Route path="/pizza-sizes/{id:Int}" page={PizzaSizePizzaSizePage} name="pizzaSize" />
-          <Route path="/pizza-sizes" page={PizzaSizePizzaSizesPage} name="pizzaSizes" />
-        </Set>
-        <Set wrap={ScaffoldLayout} title="Pizza Types" titleTo="pizzaTypes" buttonLabel="New Type" buttonTo="newPizzaType">
-          <Route path="/pizza-types/new" page={PizzaTypeNewPizzaTypePage} name="newPizzaType" />
-          <Route path="/pizza-types/{id:Int}/edit" page={PizzaTypeEditPizzaTypePage} name="editPizzaType" />
-          <Route path="/pizza-types/{id:Int}" page={PizzaTypePizzaTypePage} name="pizzaType" />
-          <Route path="/pizza-types" page={PizzaTypePizzaTypesPage} name="pizzaTypes" />
-        </Set>
-        <Set wrap={ScaffoldLayout} title="Pizza Toppings" titleTo="pizzaToppings" buttonLabel="New Topping" buttonTo="newPizzaTopping">
-          <Route path="/pizza-toppings/new" page={PizzaToppingNewPizzaToppingPage} name="newPizzaTopping" />
-          <Route path="/pizza-toppings/{id:Int}/edit" page={PizzaToppingEditPizzaToppingPage} name="editPizzaTopping" />
-          <Route path="/pizza-toppings/{id:Int}" page={PizzaToppingPizzaToppingPage} name="pizzaTopping" />
-          <Route path="/pizza-toppings" page={PizzaToppingPizzaToppingsPage} name="pizzaToppings" />
-        </Set>
+      </Set>
+      <Set wrap={ShopLayout} buttonLabel="New Size" buttonTo="newPizzaSize">
+        <Route path="/pizza-sizes/new" page={PizzaSizeNewPizzaSizePage} name="newPizzaSize" />
+        <Route path="/pizza-sizes/{id:Int}/edit" page={PizzaSizeEditPizzaSizePage} name="editPizzaSize" />
+        <Route path="/pizza-sizes/{id:Int}" page={PizzaSizePizzaSizePage} name="pizzaSize" />
+        <Route path="/pizza-sizes" page={PizzaSizePizzaSizesPage} name="pizzaSizes" />
+      </Set>
+      <Set wrap={ShopLayout} buttonLabel="New Type" buttonTo="newPizzaType">
+        <Route path="/pizza-types/new" page={PizzaTypeNewPizzaTypePage} name="newPizzaType" />
+        <Route path="/pizza-types/{id:Int}/edit" page={PizzaTypeEditPizzaTypePage} name="editPizzaType" />
+        <Route path="/pizza-types/{id:Int}" page={PizzaTypePizzaTypePage} name="pizzaType" />
+        <Route path="/pizza-types" page={PizzaTypePizzaTypesPage} name="pizzaTypes" />
+      </Set>
+      <Set wrap={ShopLayout} buttonLabel="New Topping" buttonTo="newPizzaTopping">
+        <Route path="/pizza-toppings/new" page={PizzaToppingNewPizzaToppingPage} name="newPizzaTopping" />
+        <Route path="/pizza-toppings/{id:Int}/edit" page={PizzaToppingEditPizzaToppingPage} name="editPizzaTopping" />
+        <Route path="/pizza-toppings/{id:Int}" page={PizzaToppingPizzaToppingPage} name="pizzaTopping" />
+        <Route path="/pizza-toppings" page={PizzaToppingPizzaToppingsPage} name="pizzaToppings" />
       </Set>
       <Set wrap={ScaffoldLayout} title="Addresses" titleTo="addresses" buttonLabel="New Address" buttonTo="newAddress">
         <Route path="/addresses/new" page={AddressNewAddressPage} name="newAddress" />
