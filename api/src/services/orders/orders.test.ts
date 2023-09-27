@@ -100,5 +100,16 @@ describe('orders', () => {
         ).rejects.toThrow()
       }
     )
+
+    scenario(
+      'can cancel a canceled order (should do nothing)',
+      async (scenario: StandardScenario) => {
+        const result = await cancelOrder({
+          id: scenario.order.new.id,
+        })
+
+        expect(result.status).toEqual('canceled')
+      }
+    )
   })
 })

@@ -246,6 +246,10 @@ export const cancelOrder: MutationResolvers['cancelOrder'] = async ({ id }) => {
     presence: true,
   })
 
+  if (order.status === OrderStatus.CANCELED) {
+    return order
+  }
+
   await validateWith(async () => {
     if (order.status === OrderStatus.DONE) {
       throw 'Sorry, the order is already complete. Canceling is not possible'
