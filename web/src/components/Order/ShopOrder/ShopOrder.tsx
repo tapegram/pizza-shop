@@ -1,4 +1,7 @@
-import type { DeleteOrderMutationVariables, FindOrderById } from 'types/graphql'
+import type {
+  DeleteOrderMutationVariables,
+  FindOrderByIdForShop,
+} from 'types/graphql'
 
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
@@ -7,7 +10,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { timeTag } from 'src/lib/formatters'
 
 interface Props {
-  order: NonNullable<FindOrderById['order']>
+  order: NonNullable<FindOrderByIdForShop['order']>
 }
 
 const CANCEL_ORDER_MUTATION = gql`
@@ -36,6 +39,12 @@ const ShopOrder = ({ order }: Props) => {
     }
   }
 
+  const onNextStatusClick = (id: AdvanceOrderStatusMutationVariables['id']) => {
+    // if (confirm('Are you sure you want to cancel this order?')) {
+    //   cancelOrder({ variables: { id } })
+    // }
+  }
+
   return (
     <>
       <div className="rw-segment">
@@ -59,6 +68,17 @@ const ShopOrder = ({ order }: Props) => {
                   Cancel
                 </button>
               </td>
+              {order.nextStatus && (
+                <td>
+                  <button
+                    type="button"
+                    className="rw-button rw-button-red"
+                    onClick={() => onNextStatusClick(order.id)}
+                  >
+                    MARK {order.nextStatus}
+                  </button>
+                </td>
+              )}
             </tr>
             <tr>
               <th>Placed at</th>

@@ -240,7 +240,9 @@ export const updateOrder: MutationResolvers['updateOrder'] = ({
 }
 
 export const cancelOrder: MutationResolvers['cancelOrder'] = async ({ id }) => {
-  const order = await db.order.findUnique({ where: { id } })
+  const order = await db.order.findUnique({
+    where: { id },
+  })
 
   validate(order, 'Order', {
     presence: true,

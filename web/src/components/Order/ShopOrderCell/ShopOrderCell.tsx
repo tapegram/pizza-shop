@@ -5,10 +5,11 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import ShopOrder from 'src/components/Order/ShopOrder'
 
 export const QUERY = gql`
-  query FindOrderById($id: Int!) {
+  query FindOrderByIdForShop($id: Int!) {
     order: order(id: $id) {
       id
       status
+      nextStatus
       customerInfo {
         name
         email
