@@ -1,13 +1,13 @@
+import type {
+  DeletePizzaToppingMutationVariables,
+  FindPizzaToppingById,
+} from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { checkboxInputTag } from 'src/lib/formatters'
-
-import type {
-  DeletePizzaToppingMutationVariables,
-  FindPizzaToppingById,
-} from 'types/graphql'
 
 const DELETE_PIZZA_TOPPING_MUTATION = gql`
   mutation DeletePizzaToppingMutation($id: Int!) {
@@ -24,7 +24,7 @@ interface Props {
 const PizzaTopping = ({ pizzaTopping }: Props) => {
   const [deletePizzaTopping] = useMutation(DELETE_PIZZA_TOPPING_MUTATION, {
     onCompleted: () => {
-      toast.success('PizzaTopping deleted')
+      toast.success('Topping deleted')
       navigate(routes.pizzaToppings())
     },
     onError: (error) => {
@@ -33,7 +33,7 @@ const PizzaTopping = ({ pizzaTopping }: Props) => {
   })
 
   const onDeleteClick = (id: DeletePizzaToppingMutationVariables['id']) => {
-    if (confirm('Are you sure you want to delete pizzaTopping ' + id + '?')) {
+    if (confirm('Are you sure you want to delete this topping?')) {
       deletePizzaTopping({ variables: { id } })
     }
   }
@@ -43,7 +43,7 @@ const PizzaTopping = ({ pizzaTopping }: Props) => {
       <div className="rw-segment">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
-            PizzaTopping {pizzaTopping.id} Detail
+            Topping {pizzaTopping.name}
           </h2>
         </header>
         <table className="rw-table">

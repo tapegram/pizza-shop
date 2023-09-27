@@ -17,6 +17,33 @@ const CANCEL_ORDER_MUTATION = gql`
   mutation CancelOrderMutation($id: Int!) {
     cancelOrder(id: $id) {
       id
+      status
+      nextStatus
+      customerInfo {
+        name
+        email
+        phone
+      }
+      delivery {
+        address {
+          streetAddress1
+          streetAddress2
+          city
+          state
+          zipCode
+        }
+      }
+      pizzaType {
+        name
+      }
+      pizzaSize {
+        name
+      }
+      pizzaToppings {
+        name
+      }
+      createdAt
+      updatedAt
     }
   }
 `
@@ -25,26 +52,52 @@ const ADVANCE_ORDER_STATUS_MUTATION = gql`
   mutation AdvanceOrderStatusMutation($id: Int!) {
     advanceOrderStatus(id: $id) {
       id
+      status
+      nextStatus
+      customerInfo {
+        name
+        email
+        phone
+      }
+      delivery {
+        address {
+          streetAddress1
+          streetAddress2
+          city
+          state
+          zipCode
+        }
+      }
+      pizzaType {
+        name
+      }
+      pizzaSize {
+        name
+      }
+      pizzaToppings {
+        name
+      }
+      createdAt
+      updatedAt
     }
   }
 `
 
-const ShopOrder = ({ order }: Props) => {
-  const [status, setStatus] = React.useState(order.status)
+const ShopOrder = (props: Props) => {
+  const [order, setOrder] = React.useState(props.order)
   const [cancelOrder] = useMutation(CANCEL_ORDER_MUTATION, {
-    onCompleted: () => {
+    onCompleted: (data) => {
       toast.success('Order canceled')
-      setStatus('CANCELED')
+      setOrder(data.cancelOrder)
     },
     onError: (error) => {
       toast.error(error.message)
     },
   })
   const [advanceOrderStatus] = useMutation(ADVANCE_ORDER_STATUS_MUTATION, {
-    onCompleted: () => {
+    onCompleted: (data) => {
       toast.success('Order updated!')
-      // Could get out of sync with server. Might be worth doing a full refresh of the order
-      setStatus(order.nextStatus)
+      setOrder(data.advanceOrderStatus)
     },
     onError: (error) => {
       toast.error(error.message)
@@ -65,25 +118,24 @@ const ShopOrder = ({ order }: Props) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
-            Coming soon: Your Pizza!
-          </h2>
+          <h2 className="rw-heading rw-heading-secondary">Order {order.id}</h2>
         </header>
         <table className="rw-table table-auto w-full">
           <tbody>
             <tr>
               <th>Status</th>
-              <td>{status.toUpperCase()}</td>
-              <td>
-                {' '}
-                <button
-                  type="button"
-                  className="rw-button rw-button-red"
-                  onClick={() => onCancelClick(order.id)}
-                >
-                  Cancel
-                </button>
-              </td>
+              <td>{order.status.toUpperCase()}</td>
+              {order.status != 'canceled' && order.status != 'done' && (
+                <td>
+                  <button
+                    type="button"
+                    className="rw-button rw-button-red"
+                    onClick={() => onCancelClick(order.id)}
+                  >
+                    Cancel
+                  </button>
+                </td>
+              )}
               {order.nextStatus && (
                 <td>
                   <button

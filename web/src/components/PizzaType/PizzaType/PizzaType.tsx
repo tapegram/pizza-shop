@@ -24,7 +24,7 @@ interface Props {
 const PizzaType = ({ pizzaType }: Props) => {
   const [deletePizzaType] = useMutation(DELETE_PIZZA_TYPE_MUTATION, {
     onCompleted: () => {
-      toast.success('PizzaType deleted')
+      toast.success('Pizza type deleted')
       navigate(routes.pizzaTypes())
     },
     onError: (error) => {
@@ -33,7 +33,7 @@ const PizzaType = ({ pizzaType }: Props) => {
   })
 
   const onDeleteClick = (id: DeletePizzaTypeMutationVariables['id']) => {
-    if (confirm('Are you sure you want to delete pizzaType ' + id + '?')) {
+    if (confirm('Are you sure you want to delete this pizza type?')) {
       deletePizzaType({ variables: { id } })
     }
   }
@@ -43,7 +43,7 @@ const PizzaType = ({ pizzaType }: Props) => {
       <div className="rw-segment">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
-            PizzaType {pizzaType.id} Detail
+            Pizza Type {pizzaType.name}
           </h2>
         </header>
         <table className="rw-table">

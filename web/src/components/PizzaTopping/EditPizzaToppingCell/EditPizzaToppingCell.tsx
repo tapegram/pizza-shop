@@ -45,7 +45,7 @@ export const Success = ({
     UPDATE_PIZZA_TOPPING_MUTATION,
     {
       onCompleted: () => {
-        toast.success('PizzaTopping updated')
+        toast.success('Topping updated')
         navigate(routes.pizzaToppings())
       },
       onError: (error) => {
@@ -65,7 +65,7 @@ export const Success = ({
     <div className="rw-segment">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">
-          Edit PizzaTopping {pizzaTopping?.id}
+          Edit Topping {pizzaTopping?.name}
         </h2>
       </header>
       <div className="rw-segment-main">

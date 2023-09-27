@@ -37,7 +37,7 @@ export const Success = ({ pizzaType }: CellSuccessProps<EditPizzaTypeById>) => {
     UPDATE_PIZZA_TYPE_MUTATION,
     {
       onCompleted: () => {
-        toast.success('PizzaType updated')
+        toast.success('Pizza type updated')
         navigate(routes.pizzaTypes())
       },
       onError: (error) => {
@@ -57,7 +57,7 @@ export const Success = ({ pizzaType }: CellSuccessProps<EditPizzaTypeById>) => {
     <div className="rw-segment">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">
-          Edit PizzaType {pizzaType?.id}
+          Edit Pizza Type {pizzaType?.name}
         </h2>
       </header>
       <div className="rw-segment-main">

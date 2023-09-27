@@ -1,10 +1,10 @@
+import type { CreatePizzaToppingInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import PizzaToppingForm from 'src/components/PizzaTopping/PizzaToppingForm'
-
-import type { CreatePizzaToppingInput } from 'types/graphql'
 
 const CREATE_PIZZA_TOPPING_MUTATION = gql`
   mutation CreatePizzaToppingMutation($input: CreatePizzaToppingInput!) {
@@ -19,7 +19,7 @@ const NewPizzaTopping = () => {
     CREATE_PIZZA_TOPPING_MUTATION,
     {
       onCompleted: () => {
-        toast.success('PizzaTopping created')
+        toast.success('Topping created')
         navigate(routes.pizzaToppings())
       },
       onError: (error) => {
@@ -35,7 +35,7 @@ const NewPizzaTopping = () => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New PizzaTopping</h2>
+        <h2 className="rw-heading rw-heading-secondary">New Topping</h2>
       </header>
       <div className="rw-segment-main">
         <PizzaToppingForm onSave={onSave} loading={loading} error={error} />

@@ -1,10 +1,10 @@
+import type { CreatePizzaSizeInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import PizzaSizeForm from 'src/components/PizzaSize/PizzaSizeForm'
-
-import type { CreatePizzaSizeInput } from 'types/graphql'
 
 const CREATE_PIZZA_SIZE_MUTATION = gql`
   mutation CreatePizzaSizeMutation($input: CreatePizzaSizeInput!) {
@@ -35,7 +35,7 @@ const NewPizzaSize = () => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New PizzaSize</h2>
+        <h2 className="rw-heading rw-heading-secondary">New Pizza Size</h2>
       </header>
       <div className="rw-segment-main">
         <PizzaSizeForm onSave={onSave} loading={loading} error={error} />
