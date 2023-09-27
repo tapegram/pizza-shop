@@ -117,7 +117,9 @@ const OrderForm = (props: OrderFormProps) => {
           multiple={true}
         >
           {props.toppings.map((topping) => (
-            <option value={topping.id}>{topping.name}</option>
+            <option key={topping.id} value={topping.id}>
+              {topping.name}
+            </option>
           ))}
         </SelectField>
 

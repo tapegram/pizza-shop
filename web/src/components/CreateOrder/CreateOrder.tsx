@@ -36,9 +36,9 @@ const CREATE_ORDER_MUTATION = gql`
 `
 const CreateOrder = ({ sizes, toppings, types }: Props) => {
   const [createOrder, { loading, error }] = useMutation(CREATE_ORDER_MUTATION, {
-    onCompleted: () => {
+    onCompleted: (data) => {
       toast.success('Order created')
-      navigate(routes.orders())
+      navigate(routes.customerOrder({ id: data.createOrder.id }))
     },
     onError: (error) => {
       toast.error(error.message)
