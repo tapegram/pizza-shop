@@ -18,7 +18,7 @@ const Routes = () => {
     <Router>
       <Set wrap={Layout}>
         <Route path="/create-order" page={CreateOrderPage} name="createOrder" />
-        <Route path="/orders/{id:Int}" page={OrderOrderPage} name="order" />
+        <Route path="/orders/{id:Int}" page={OrderCustomerOrderPage} name="customerOrder" />
         <Route path="/orders" page={OrderOrdersPage} name="orders" />
       </Set>
       <Set wrap={ScaffoldLayout} title="PizzaSizes" titleTo="pizzaSizes" buttonLabel="New PizzaSize" buttonTo="newPizzaSize">

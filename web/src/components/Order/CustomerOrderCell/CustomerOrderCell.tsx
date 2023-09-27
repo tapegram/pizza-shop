@@ -2,7 +2,7 @@ import type { FindOrderById } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import Order from 'src/components/Order/Order'
+import CustomerOrder from 'src/components/Order/CustomerOrder'
 
 export const QUERY = gql`
   query FindOrderById($id: Int!) {
@@ -27,5 +27,5 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ order }: CellSuccessProps<FindOrderById>) => {
-  return <Order order={order} />
+  return <CustomerOrder order={order} />
 }

@@ -18,7 +18,7 @@ interface Props {
   order: NonNullable<FindOrderById['order']>
 }
 
-const Order = ({ order }: Props) => {
+const CustomerOrder = ({ order }: Props) => {
   const [deleteOrder] = useMutation(DELETE_ORDER_MUTATION, {
     onCompleted: () => {
       toast.success('Order deleted')
@@ -95,4 +95,4 @@ const Order = ({ order }: Props) => {
   )
 }
 
-export default Order
+export default CustomerOrder

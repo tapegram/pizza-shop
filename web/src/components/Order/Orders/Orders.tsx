@@ -65,7 +65,7 @@ const OrdersList = ({ orders }: FindOrders) => {
               <td>
                 <nav className="rw-table-actions">
                   <Link
-                    to={routes.order({ id: order.id })}
+                    to={routes.customerOrder({ id: order.id })}
                     title={'Show order ' + order.id + ' detail'}
                     className="rw-button rw-button-small"
                   >
