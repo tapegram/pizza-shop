@@ -1,6 +1,5 @@
 import type { FindOrders } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Orders from 'src/components/Order/Orders'
@@ -22,14 +21,7 @@ export const QUERY = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No orders yet. '}
-      <Link to={routes.newOrder()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
+  return <div className="rw-text-center">{'No orders yet. '}</div>
 }
 
 export const Failure = ({ error }: CellFailureProps) => (
