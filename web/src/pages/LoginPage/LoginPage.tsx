@@ -9,14 +9,14 @@ import {
   Submit,
   FieldError,
 } from '@redwoodjs/forms'
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { Link, navigate, routes, useLocation } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 
 const WELCOME_MESSAGE = 'Welcome back!'
-const REDIRECT = routes.orders
+const REDIRECT = 'orders'
 
 const LoginPage = ({ type }) => {
   const {
@@ -30,11 +30,21 @@ const LoginPage = ({ type }) => {
   const [showWebAuthn, setShowWebAuthn] = useState(
     webAuthn.isEnabled() && type !== 'password'
   )
+  // https://community.redwoodjs.com/t/solved-dbauth-login-redirect/2539/7
+  const { search } = useLocation()
+  const hasRedirectTo = /redirectTo/.test(search)
+  const redirectTo = search
+    .replace('?redirectTo=', '')
+    .replace(/&\S+=\S[&^]/g, '')
 
   // should redirect right after login or wait to show the webAuthn prompts?
   useEffect(() => {
     if (isAuthenticated && (!shouldShowWebAuthn || webAuthn.isEnabled())) {
-      navigate(REDIRECT)
+      if (hasRedirectTo) {
+        navigate(redirectTo)
+      } else {
+        navigate(routes.orders())
+      }
     }
   }, [isAuthenticated, shouldShowWebAuthn])
 
