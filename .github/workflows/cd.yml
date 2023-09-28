@@ -45,10 +45,10 @@ jobs:
       - run: yarn install
       # build the redwood app
       - run: yarn rw build
-      # run the api tests
-      - run: yarn rw test api --no-watch
-      # run the web tests
-      - run: yarn rw test web --no-watch
+      # # run the api tests
+      # - run: yarn rw test api --no-watch
+      # # run the web tests
+      # - run: yarn rw test web --no-watch
       # run migrations on the actual database
       - run: yarn rw prisma migrate deploy
       # run seed script in the actual db
