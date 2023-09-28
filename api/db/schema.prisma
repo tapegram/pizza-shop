@@ -12,8 +12,23 @@ generator client {
 // https://redwoodjs.com/docs/auth/dbauth
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
+  id                  Int              @id @default(autoincrement())
+  email               String           @unique
+  hashedPassword      String
+  salt                String
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+  webAuthnChallenge   String?          @unique
+  credentials         UserCredential[]
+}
+
+model UserCredential {
+  id         String  @id
+  userId     Int
+  user       User    @relation(fields: [userId], references: [id])
+  publicKey  Bytes
+  transports String?
+  counter    BigInt
 }
 
 // Pizza Shop Config

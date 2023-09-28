@@ -8,7 +8,7 @@ export const schema = gql`
 
   type Query {
     pizzaToppings(includeUnavailable: Boolean = false): [PizzaTopping!]!
-      @requireAuth
+      @skipAuth
     pizzaTopping(id: Int!): PizzaTopping @requireAuth
   }
 

@@ -7,7 +7,7 @@ export const schema = gql`
   }
 
   type Query {
-    pizzaSizes(includeUnavailable: Boolean = false): [PizzaSize!]! @requireAuth
+    pizzaSizes(includeUnavailable: Boolean = false): [PizzaSize!]! @skipAuth
     pizzaSize(id: Int!): PizzaSize @requireAuth
   }
 

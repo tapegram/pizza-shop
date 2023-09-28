@@ -13,9 +13,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@redwoodjs/auth-dbauth-web": "6.3.1",
     "@redwoodjs/forms": "6.3.1",
     "@redwoodjs/router": "6.3.1",
     "@redwoodjs/web": "6.3.1",
+    "@simplewebauthn/browser": "^7",
     "humanize-string": "2.1.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",

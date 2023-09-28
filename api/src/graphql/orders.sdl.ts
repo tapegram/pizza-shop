@@ -18,7 +18,7 @@ export const schema = gql`
 
   type Query {
     orders: [Order!]! @requireAuth
-    order(id: Int!): Order @requireAuth
+    order(id: Int!): Order @skipAuth
   }
 
   input CreateOrderFormInput {
@@ -37,7 +37,7 @@ export const schema = gql`
   }
 
   type Mutation {
-    createOrder(input: CreateOrderFormInput!): Order! @requireAuth
+    createOrder(input: CreateOrderFormInput!): Order! @skipAuth
     deleteOrder(id: Int!): Order! @requireAuth
     cancelOrder(id: Int!): Order! @requireAuth
     advanceOrderStatus(id: Int!): Order! @requireAuth
