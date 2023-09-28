@@ -3,6 +3,7 @@ import { PlusIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import { Link, routes } from '@redwoodjs/router'
+import { useAuth } from 'src/auth'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -43,6 +44,7 @@ type Props = {
   buttonTo?: string
 }
 const Navbar = ({ buttonLabel, buttonTo }: Props) => {
+  const { logOut } = useAuth()
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -95,6 +97,12 @@ const Navbar = ({ buttonLabel, buttonTo }: Props) => {
                     </Link>
                   </div>
                 )}
+                <a
+                  className="block cursor-pointer border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
+                  onClick={() => logOut()}
+                >
+                  Log Out
+                </a>
               </div>
             </div>
           </div>
